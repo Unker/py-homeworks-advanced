@@ -24,11 +24,17 @@ def read_csv_to_dict(file_name):
     return contacts_dict
 
 
-# код для записи файла в формате CSV
-def write_list_to_file(file_name, lst):
+# запись в файл в формате CSV
+def write_dicts_to_file(file_name, dicts):
+  keys = list(dicts[0].keys())
+  print(keys)
   with open(file_name, "w") as f:
     datawriter = csv.writer(f, delimiter=',')
-    datawriter.writerows(lst)
+    datawriter.writerow(keys)
+    for d in dicts:
+      # for v in d.values():
+      datawriter.writerow(d.values())
+
 
 
 def fix_phones(in_file, out_file):
@@ -76,7 +82,7 @@ def merge_names(contacts):
 
   merge_data = []
   for (firstname,lastname),g in grouped:
-      merge_data.append({'firstname':firstname,'lastname':lastname})
+      merge_data.append({'lastname':lastname,'firstname':firstname})
       for gr in g:
         d1 = merge_data[-1]
         for k,v in gr.items():
@@ -95,10 +101,9 @@ def main():
 
   # объедим информация по Фамилии и Имени
   merged_names = merge_names(fixed_names)
-  pprint(merged_names)
 
-  # TODO 2: сохраните получившиеся данные в другой файл
-  # write_list_to_file("phonebook.csv", fixed_phones)
+  # сохраните получившиеся данные в другой файл
+  write_dicts_to_file("phonebook.csv", merged_names)
 
 
 if __name__ == '__main__':
