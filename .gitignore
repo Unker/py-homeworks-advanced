@@ -1,3 +1,5 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+/5.Regexp/fixed_phones.csv
