@@ -16,9 +16,9 @@ article_dicts = []
 for article in articles:
 	# смотрим совпадение по ключевым словам
 	hubs = article.findAll("a", {"class": "tm-article-snippet__hubs-item-link"})
-	key_words = [hub.span.text.lower() for hub in hubs]
+	hubs = [hub.span.text.lower() for hub in hubs]
 	is_match = False
-	matching = [words for words in key_words for key in KEYWORDS if key in words]
+	matching = [hub for hub in hubs for key in KEYWORDS if key in hub]
 	if len(matching):
 		is_match = True
 
