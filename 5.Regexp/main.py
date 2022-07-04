@@ -3,6 +3,7 @@ import csv
 import re
 import operator
 import itertools
+import os
 
 
 # читаем адресную книгу в формате CSV в список словарей
@@ -27,7 +28,7 @@ def read_csv_to_dict(file_name):
 # запись в файл в формате CSV
 def write_dicts_to_file(file_name, dicts):
   keys = list(dicts[0].keys())
-  print(keys)
+  # print(keys)
   with open(file_name, "w") as f:
     datawriter = csv.writer(f, delimiter=',')
     datawriter.writerow(keys)
@@ -98,6 +99,7 @@ def main():
 
   # подправим ФИО
   fixed_names = fix_names(in_file="fixed_phones.csv")
+  os.remove("fixed_phones.csv")
 
   # объедим информация по Фамилии и Имени
   merged_names = merge_names(fixed_names)
