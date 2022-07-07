@@ -1,10 +1,6 @@
 
 
-nested_list = [
-	['a', ['b', 'b2'], 'c'],
-	['d', 'e', 'f', 'h', {'aa':12,'b':23}, False],
-	[1, 2, None],
-]
+
 
 class FlatIterator(object):
 	""" 
@@ -41,10 +37,20 @@ class FlatIterator(object):
 			return elem
 
 
+def main():
+	nested_list = [
+		['a', ['b', 'b2'], 'c'],
+		['d', 'e', 'f', 'h', {'aa':12,'b':23}, False],
+		[1, 2, None],
+	]
 
-flatter = FlatIterator(nested_list)
-for item in flatter:
-	print(f'{item}') #  
+	flatter = FlatIterator(nested_list)
+	for item in flatter:
+		print(f'{item}') #  
 
-flat_list = [item for item in flatter]
-print(flat_list)
+	flat_list = [item for item in flatter]
+	print(flat_list)
+
+
+if __name__ == '__main__':
+	main()
