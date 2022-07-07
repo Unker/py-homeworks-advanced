@@ -2,12 +2,15 @@
 
 nested_list = [
 	['a', ['b', 'b2'], 'c'],
-	['d', 'e', 'f', 'h', False],
+	['d', 'e', 'f', 'h', {'aa':12,'b':23}, False],
 	[1, 2, None],
 ]
 
 class FlatIterator(object):
-	"""docstring for FlatIterator"""
+	""" 
+	*Итератор обрабатывающий списки с любым уровнем вложенности
+	Возвращает плоское представление списков
+	"""
 	def __init__(self, nested_list: list):
 		super(FlatIterator, self).__init__()
 		self.nested_list = nested_list
@@ -33,7 +36,6 @@ class FlatIterator(object):
 		if(type(elem) == list):
 			for e in elem:
 				self._flat_list(e)
-			return 
 		else:
 			self.flatten_list.append(elem)
 			return elem
