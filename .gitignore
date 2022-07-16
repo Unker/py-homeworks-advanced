@@ -3,3 +3,9 @@ __pycache__/
 *$py.class
 
 /5.Regexp/fixed_phones.csv
+
+/venv
+/.idea
+.env
+/.ipynb_checkpoints
+requiremеnts.txt
