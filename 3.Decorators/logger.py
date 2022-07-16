@@ -21,7 +21,7 @@ def logger(path='/', log_name='logger.log'):
             log += f'was returned: {ret}\n'
             log += '\n'
             Path(path).mkdir(parents=True, exist_ok=True)
-            with open(os.path.join(path, log_name), 'a+') as f:
+            with open(os.path.join(path, log_name), 'a+', encoding="utf8") as f:
                 f.write(log)
             return ret
         return new_function
