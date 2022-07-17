@@ -63,8 +63,12 @@ def add_new_shelf(shelf_number=''):
 
 
 def append_doc_to_shelf(doc_number, shelf_number):
+    success = False
     add_new_shelf(shelf_number)
-    directories[shelf_number].append(doc_number)
+    if doc_number not in directories[shelf_number]:
+        directories[shelf_number].append(doc_number)
+        success = True
+    return success
 
 
 def delete_doc():
