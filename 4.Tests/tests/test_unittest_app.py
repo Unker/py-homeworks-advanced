@@ -94,7 +94,7 @@ class TestApp(unittest.TestCase):
         self.assertTrue(success)
         is_doc_exist = doc_num in directories[shelf_num]
         self.assertTrue(is_doc_exist)
-        # duplicate doc to shelf
+        # duplicate doc to shelf must be rejected
         success = app.append_doc_to_shelf(doc_num, shelf_num)
         self.assertFalse(success)
 
@@ -117,6 +117,7 @@ class TestApp(unittest.TestCase):
 
     @patch('builtins.input')
     def test_move_doc_to_shelf(self, m_input):
+        # move onto new shelf
         new_shelf_num = 'testNewShelf'
         m_input.side_effect = [self.new_doc_num, new_shelf_num]
         app.move_doc_to_shelf()
@@ -124,7 +125,19 @@ class TestApp(unittest.TestCase):
             shelf = app.get_doc_shelf()
         self.assertEqual(new_shelf_num, shelf)
 
+        # move onto old shelf
         shelf_num = 'testShelf321'
+        m_input.side_effect = [self.new_doc_num, shelf_num]
+        app.move_doc_to_shelf()
+        with unittest.mock.patch('builtins.input', return_value=self.new_doc_num):
+            shelf = app.get_doc_shelf()
+        self.assertEqual(shelf_num, shelf)
+
+    @patch('builtins.input')
+    def test_secretary_program_start(self, m_input):
+        m_input.side_effect = ['help', 'q']
+        app.secretary_program_start()
+
 
 if __name__ == '__main__':
     unittest.main()
