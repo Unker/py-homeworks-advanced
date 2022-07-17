@@ -44,10 +44,13 @@ def get_all_doc_owners_names():
 
 
 def remove_doc_from_shelf(doc_number):
+    success = False
     for directory_number, directory_docs_list in directories.items():
         if doc_number in directory_docs_list:
             directory_docs_list.remove(doc_number)
+            success = True
             break
+    return success
 
 
 def add_new_shelf(shelf_number=''):
