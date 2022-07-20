@@ -29,8 +29,13 @@ class TestStack(unittest.TestCase):
         popped_element = self.stack.pop()
         self.assertEqual(new_element, popped_element)
         sz_after_pop = self.stack.size()
-        self.assertEqual(new_sz-sz_after_pop,1)
-
+        self.assertEqual(new_sz-sz_after_pop, 1)
+        # test empty
+        for i in range(self.stack.size() - 1):
+            self.stack.pop()
+        ret = self.stack.pop()
+        self.assertIsNotNone(ret)
+        self.assertRaises(ValueError, self.stack.pop)
 
     def test_dunder_methods(self):
         self.stack = stack.Stack(TestStack.lst)
