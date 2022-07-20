@@ -5,12 +5,11 @@ import stack
 
 
 class TestStack(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.lst = list(range(10))
+    def setUp(self) -> None:
+        self.lst = list(range(10))
 
     def test_main_methods(self):
-        self.stack = stack.Stack(TestStack.lst)
+        self.stack = stack.Stack(self.lst)
         # test size()
         ret = self.stack.size()
         self.assertEqual(ret, len(self.lst))
@@ -38,6 +37,8 @@ class TestStack(unittest.TestCase):
         self.assertRaises(ValueError, self.stack.pop)
 
     def test_dunder_methods(self):
-        self.stack = stack.Stack(TestStack.lst)
+        self.stack = stack.Stack(self.lst)
         ret = self.stack.size()
         self.assertEqual(ret, len(self.stack))
+        elements = [el for el in self.stack]
+        self.assertEqual(set(self.lst), set(elements))
