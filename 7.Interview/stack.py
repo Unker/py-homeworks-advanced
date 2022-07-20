@@ -1,16 +1,17 @@
 from typing import List
+from copy import deepcopy
 
 
 class Stack:
     def __init__(self, vals: list):
-        self.vals = vals
+        self.vals = deepcopy(vals)
         self.sz = len(vals)
 
     def size(self) -> int:
         return self.sz
 
     def is_empty(self):
-        return self.size == 0
+        return self.sz == 0
 
     def push(self, element):
         self.vals.append(element)
@@ -18,7 +19,7 @@ class Stack:
 
     def pop(self):
         if self.is_empty():
-            return None
+            raise ValueError('The stack is empty')
         else:
             ret = self.vals.pop()
             self.sz -= 1
@@ -26,7 +27,7 @@ class Stack:
 
     def peek(self):
         if self.is_empty():
-            return None
+            raise ValueError('The stack is empty')
         else:
             return self.vals[-1]
 
@@ -34,10 +35,13 @@ class Stack:
         return f'Stack: {self.vals}'
 
     def __iter__(self):
-        pass
+        return self
 
     def __next__(self):
-        pass
+        if self.size():
+            return self.pop()
+        else:
+            raise StopIteration
 
     def __eq__(self, other):
         pass
@@ -47,8 +51,10 @@ class Stack:
 
 
 if __name__ == '__main__':
-    a = [1,2,3,4,5]
+    a = [1, 2, 3, 4, 5]
     stack = Stack(a)
     print(stack)
     print(stack.size())
     print(stack.is_empty())
+    for element in stack:
+        print(element)
