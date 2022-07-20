@@ -1,4 +1,3 @@
-from typing import List
 from copy import deepcopy
 
 
@@ -44,7 +43,7 @@ class Stack:
             raise StopIteration
 
     def __eq__(self, other):
-        pass
+        return set(self.vals) == set(other.vals)
 
     def __len__(self):
         return self.size()
@@ -53,8 +52,12 @@ class Stack:
 if __name__ == '__main__':
     a = [1, 2, 3, 4, 5]
     stack = Stack(a)
+    stack2 = Stack(a)
     print(stack)
     print(stack.size())
     print(stack.is_empty())
+    print(f'eq: {stack==stack2}')
+    stack.pop()
+    print(f'eq: {stack==stack2}')
     for element in stack:
         print(element)
