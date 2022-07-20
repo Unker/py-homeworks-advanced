@@ -2,9 +2,14 @@ from copy import deepcopy
 
 
 class Stack:
-    def __init__(self, vals: list):
-        self.vals = deepcopy(vals)
-        self.sz = len(vals)
+    def __init__(self, inputs: list):
+        if isinstance(inputs, list):
+            self.vals = deepcopy(inputs)
+        elif isinstance(inputs, str):
+            self.vals = [char for char in inputs]
+        else:
+            self.vals = [inputs]
+        self.sz = len(self.vals)
 
     def size(self) -> int:
         return self.sz
