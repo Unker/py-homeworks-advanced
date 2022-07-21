@@ -8,7 +8,7 @@ mirror = {
 }
 
 
-def is_balanced(elements: Stack) -> bool:
+def is_balanced(elements) -> bool:
     elements = Stack(elements)
     if elements.size() % 2 != 0 or elements.size() == 0:
         return False
