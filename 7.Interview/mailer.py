@@ -29,7 +29,7 @@ class Mailer:
         ms.ehlo()
 
         ms.login(self.login, self.password)
-        ms.sendmail(self.login, ms, msg.as_string())
+        ms.sendmail(from_addr=self.login, to_addrs=msg['To'], msg=msg.as_string())
 
         ms.quit()
 
@@ -44,19 +44,20 @@ class Mailer:
         latest_email_uid = data[0].split()[-1]
         result, data = mail.uid('fetch', latest_email_uid, '(RFC822)')
         raw_email = data[0][1]
-        email_message = email.message_from_string(raw_email)
+        email_message = email.message_from_string(raw_email.decode("utf-8"))
         mail.logout()
 
 
 if __name__ == '__main__':
-    login = 'login@gmail.com'
-    password = 'qwerty'
+    # login = 'login@gmail.com'
+    # password = 'qwerty'
+    login = 'kfi.unknown@gmail.com'
+    password = 'xpdonxexoclntvhf'
     mailer = Mailer(login=login, password=password)
 
     subject = 'Subject'
     recipients = ['cut-throat2008@yandex.ru', 'vasya@email.com', 'petya@email.com']
     message = 'Message'
+    mailer.send_message(subject=subject, recipients=recipients, message=message)
     header = None
-    mailer.send_message(subject=subject, recipients=recipients,
-                        message=message, header=header)
     mailer.receive()
