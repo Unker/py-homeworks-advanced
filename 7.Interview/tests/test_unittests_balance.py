@@ -17,7 +17,10 @@ FIXTURE = [
     ('', False),
     ('aa', False),
     (None, False),
-    ('aa()', False)
+    ('aa()', False),
+    ('{{}}', True),
+    ('[]', True),
+    ('[}', False),
 ]
 
 
